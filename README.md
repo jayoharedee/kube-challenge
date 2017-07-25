@@ -8,7 +8,7 @@ This challenge consisted of three parts. Parts 1 & 2 were completed on the Googl
 
 # My thought process behind each challenge.
 
-  1. Creating a cluster was very easy and straight forward. The GCE interface was very intuitive and easy to find my way around to ensure that I was able to create the cluster with the required system resource specifications.
+  1. Creating a cluster was very easy and straight forward. The GCE interface was very intuitive and easy to find my way around to ensure that I was able to create the cluster with the required system resource specifications. The GUI felt a little too easy so I dug a bit deeper into gcloud and using the GCP CLI for provisioning the requirements.
   2. This one was a little bit tricky. Having never worked with k8 database deployments before and unsure of what Stateful set was, I headed over to the Kubernetes documentation. Luckily there was a wealth of information in the docs along with tutorials to get me started on the right path. After some research and a little bit of tweaking, I was able to create a customized YAML template for my deployment. This file can be found in the `deployments` folder.
   3. As I was completing my research, I had this last step in mind and was looking for information on how to bring the third part of the challenge to life. The bash script was put together via the use of `getopts` to collect some command line arguments via switches. Dynamically determining the IP for each pod and also the command for copying the file to the remote path was completed in thanks to `kubectl`.
 
@@ -22,10 +22,10 @@ Over all this challenge was extremely fun to work with and I wish I had more tim
   2. `gcloud config set compute/zone <zone>`
   3. `gcloud container clusters create <container name>`
   4. `gcloud container clusters get-credentials pg-stateful`
-  5. `kubectl create configmap pg-stateful-config 
-  --from-literal=postgres_user=admin 
-  --from-literal=postgres_password=mystrongpassword 
-  --from-literal=postgres_host=postgres 
+  5. `kubectl create configmap pg-stateful-config \
+  --from-literal=postgres_user=admin \
+  --from-literal=postgres_password=mystrongpassword \ 
+  --from-literal=postgres_host=postgres \
   --from-literal=pgdata=/var/lib/postgresql/data/pgdata`
   6. `gcloud compute disks create --size 200GB postgres-disk`
   7. `kubectl create -f deployment/postgres.yaml`
