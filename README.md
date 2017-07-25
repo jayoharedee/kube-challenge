@@ -15,3 +15,18 @@ This challenge consisted of three parts. Parts 1 & 2 were completed on the Googl
 When launching the Stateful Postgres cluster, I ran into a slight issue that will need to be looked at a little closer. When launching the cluster, I am able to succesfully launch the first pod but when the second comes up, I am currently running into an issue with mounting the drive as it is already in use, according to the logs. 
 
 Over all this challenge was extremely fun to work with and I wish I had more time tonight to keep it going. Regardless if I pass the challenge or not, I will continue to work on what I have completed tonight to ensure that things are performing in an optimal fashion.
+
+# Order Of Commands Used For This Project
+
+  1. `gcloud config set project <project name>`
+  2. `gcloud config set compute/zone <zone>`
+  3. `gcloud container clusters create <container name>`
+  4. `gcloud container clusters get-credentials pg-stateful`
+  5. `kubectl create configmap pg-stateful-config 
+  --from-literal=postgres_user=admin 
+  --from-literal=postgres_password=mystrongpassword 
+  --from-literal=postgres_host=postgres 
+  --from-literal=pgdata=/var/lib/postgresql/data/pgdata`
+  6. `gcloud compute disks create --size 200GB postgres-disk`
+  7. `kubectl create -f deployment/postgres.yaml`
+  8. `kubectl get pod -w -l app=postgres`
